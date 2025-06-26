@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Nội dung chính -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginBottom="24dp"/>
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:layout_marginTop="12dp"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/txtToRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chưa có tài khoản? Đăng ký"
+                android:textColor="#2196F3"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Thanh chuyển trang -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"/>
+</LinearLayout>

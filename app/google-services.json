@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92540817036",
+    "project_id": "android-eb70e",
+    "storage_bucket": "android-eb70e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92540817036:android:d4261e766dfe64447a75a9",
+        "android_client_info": {
+          "package_name": "com.example.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkimEkMVbcON_oaooMb6cTQjwFfvvS4XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

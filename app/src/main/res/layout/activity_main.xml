@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Logo ứng dụng -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerInside"
+        android:padding="8dp" />
+
+    <!-- Thanh tìm kiếm -->
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Tìm kiếm sản phẩm..."
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        android:layout_margin="8dp" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerSlider"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="8dp" />
+
+
+    <!-- Menu ngang dạng button -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/menuBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mới nhất"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giảm giá"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thịnh hành"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Danh sách sản phẩm -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProducts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Thanh chuyển trang -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>
