@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnRegister = findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.tvGoToLogin);
-        bottomNav = findViewById(R.id.bottomNav);
+
 
         btnRegister.setOnClickListener(v -> {
             String name = edtName.getText().toString().trim();
@@ -45,19 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         });
 
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.menu_home) {
-                startActivity(new Intent(this, MainActivity.class));
-                return true;
-            } else if (id == R.id.menu_cart) {
-                Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
-                return true;
-            } else if (id == R.id.menu_login) {
-                Toast.makeText(this, "Bạn đang ở trang đăng ký", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            return false;
-        });
+
     }
 }

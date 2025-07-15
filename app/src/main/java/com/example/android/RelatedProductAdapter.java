@@ -6,6 +6,8 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAdapter.RelatedViewHolder> {
@@ -40,7 +42,12 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
     @Override
     public void onBindViewHolder(@NonNull RelatedViewHolder holder, int position) {
         Product p = productList.get(position);
-        holder.img.setImageResource(p.getImageResId());
+
+        // ✅ Load ảnh từ URL bằng Glide
+        Glide.with(context)
+                .load(p.getImageUrl())
+                .into(holder.img);
+
         holder.txtName.setText(p.getName());
         holder.txtPrice.setText(p.getPrice());
     }

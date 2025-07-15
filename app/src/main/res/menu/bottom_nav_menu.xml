@@ -16,9 +16,5 @@
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="Giỏ hàng" />
 
-    <item
-        android:id="@+id/menu_login"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="Tài khoản" />
 
 </menu>

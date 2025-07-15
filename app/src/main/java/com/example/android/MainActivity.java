@@ -17,6 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewProducts;
@@ -32,14 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         initSlider();
-        initData();
         initBottomNav();
+        loadProducts(); // Gọi hàm tải dữ liệu từ API
     }
 
     private void initViews() {
         recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
         recyclerViewProducts.setLayoutManager(new LinearLayoutManager(this));
         viewPagerSlider = findViewById(R.id.viewPagerSlider);
+
+        productList = new ArrayList<>();
+        productAdapter = new ProductAdapter(this, productList);
+        recyclerViewProducts.setAdapter(productAdapter);
     }
 
     private void initSlider() {
@@ -52,39 +65,49 @@ public class MainActivity extends AppCompatActivity {
         viewPagerSlider.setAdapter(sliderAdapter);
     }
 
-    private void initData() {
-        productList = new ArrayList<>();
-        productList.add(new Product("Áo thun", "150.000 đ", R.drawable.shirt));
-        productList.add(new Product("Quần jean", "250.000 đ", R.drawable.jeans));
-        productList.add(new Product("Giày sneaker", "499.000 đ", R.drawable.shoes));
+    private void loadProducts() {
+        String url = "https://fakestoreapi.com/products";
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        productAdapter = new ProductAdapter(this, productList);
-        recyclerViewProducts.setAdapter(productAdapter);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject productObj = response.getJSONObject(i);
+                            String title = productObj.getString("title");
+                            String image = productObj.getString("image");
+                            double price = productObj.getDouble("price");
+
+                            productList.add(new Product(title, image, price));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    productAdapter.notifyDataSetChanged();
+                },
+                error -> error.printStackTrace());
+
+        queue.add(jsonArrayRequest);
     }
 
     private void initBottomNav() {
         bottomNav = findViewById(R.id.bottomNav);
 
-        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
-                int id = item.getItemId();
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-                if (id == R.id.menu_home) {
-                    Toast.makeText(MainActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (id == R.id.menu_all_products) {
-                    Toast.makeText(MainActivity.this, "Tất cả sản phẩm", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (id == R.id.menu_cart) {
-                    startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    return true;
-                } else if (id == R.id.menu_login) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    return true;
-                }
-                return false;
+            if (id == R.id.menu_home) {
+                Toast.makeText(MainActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.menu_all_products) {
+                Toast.makeText(MainActivity.this, "Tất cả sản phẩm", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.menu_cart) {
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
+                return true;
             }
+
+            return false;
         });
     }
 }

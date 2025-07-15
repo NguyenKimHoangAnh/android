@@ -5,6 +5,7 @@ import android.view.*;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import java.util.*;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
@@ -45,7 +46,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Cart cart = cartList.get(position);
-        holder.img.setImageResource(cart.getImageResId());
+
+        Glide.with(context)
+                .load(cart.getImageUrl())
+                .into(holder.img);
+
         holder.name.setText(cart.getName());
         holder.price.setText(cart.getPrice());
         holder.txtQuantity.setText("x" + cart.getQuantity());

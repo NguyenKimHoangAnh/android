@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="24dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"> <!-- Màu nền trắng -->
 
-    <!-- Nội dung chính -->
-    <ScrollView
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/logo"
+        android:contentDescription="App Logo" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:hint="Username"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="24dp">
+        android:layout_height="wrap_content"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_marginBottom="24dp"/>
-
-            <EditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"/>
-
-            <EditText
-                android:id="@+id/edtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Mật khẩu"
-                android:inputType="textPassword"
-                android:layout_marginTop="12dp"/>
-
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đăng nhập"
-                android:layout_marginTop="16dp"/>
-
-            <TextView
-                android:id="@+id/txtToRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chưa có tài khoản? Đăng ký"
-                android:textColor="#2196F3"
-                android:layout_marginTop="16dp"/>
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Thanh chuyển trang -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
+    <EditText
+        android:id="@+id/edtPassword"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"/>
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"/>
+    <TextView
+        android:id="@+id/txtRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chưa có tài khoản? Đăng ký"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
+
 </LinearLayout>

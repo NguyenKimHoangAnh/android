@@ -1,19 +1,12 @@
-// ProductAdapter.java
 package com.example.android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -52,20 +45,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product p = productList.get(position);
         holder.textProductName.setText(p.getName());
         holder.textProductPrice.setText(p.getPrice());
-        holder.imageProduct.setImageResource(p.getImageResId());
 
-        // Thêm vào giỏ hàng
+        Glide.with(context)
+                .load(p.getImageUrl())
+                .into(holder.imageProduct);
+
         holder.buttonAddToCart.setOnClickListener(v -> {
-            CartManager.addToCart(new Cart(p.getName(), p.getPrice(), p.getImageResId()));
+            CartManager.addToCart(new Cart(p.getName(), p.getPrice(), p.getImageUrl()));
             Toast.makeText(context, p.getName() + " đã thêm vào giỏ!", Toast.LENGTH_SHORT).show();
         });
 
-        // Mở trang chi tiết sản phẩm khi nhấn vào item
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
             intent.putExtra("name", p.getName());
             intent.putExtra("price", p.getPrice());
-            intent.putExtra("image", p.getImageResId());
+            intent.putExtra("image", p.getImageUrl());
             context.startActivity(intent);
         });
     }

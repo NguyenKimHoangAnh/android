@@ -12,6 +12,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerCart;
     TextView txtTotalPrice;
     CartAdapter adapter;
+    Button btnCheckout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerCart   = findViewById(R.id.recyclerCart);
         txtTotalPrice  = findViewById(R.id.txtTotalPrice);
         Button btnClear= findViewById(R.id.btnClearCart);
+        btnCheckout    = findViewById(R.id.btnCheckout);
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
         adapter = new CartAdapter(this, CartManager.getCartItems(), this::updateTotal);
@@ -35,6 +37,21 @@ public class CartActivity extends AppCompatActivity {
             updateTotal();
         });
 
+        btnCheckout.setOnClickListener(v -> {
+            if (CartManager.getCartItems().isEmpty()) {
+                Toast.makeText(this, "Giỏ hàng đang trống!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            CartManager.clearCart();
+            adapter.notifyDataSetChanged();
+            updateTotal();
+
+            Intent intent = new Intent(CartActivity.this, PaymentSuccessActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_home) {
@@ -42,9 +59,6 @@ public class CartActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.menu_cart) {
                 Toast.makeText(this, "Bạn đang ở giỏ hàng", Toast.LENGTH_SHORT).show();
-                return true;
-            } else if (id == R.id.menu_login) {
-                startActivity(new Intent(this, LoginActivity.class));
                 return true;
             }
             return false;
